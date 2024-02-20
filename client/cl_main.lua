@@ -25,6 +25,15 @@ local year, month, day, hour, minute, second = GetLocalTime()
 local SetCamActive = false
 local SetBeepActive = false
 
+function AddZeroInfrontOfLess(number)
+    if(number < 10) then
+        return 0 .. number
+    else
+        return number
+    end
+end
+
+
 -- [[ Functions ]] --
 function UpdateBodyCamTime()
     TriggerServerEvent('LENT-GovEssentials:Server:Time')
@@ -65,7 +74,7 @@ RegisterNetEvent("LENT-GovEssentials:Client:Time", function(h, m, s)
         action = "ShowBodyCam",
         Player = Player.job.grade.name .. " " .. gender .. " " .. Player.charinfo.lastname,
         Callsign = "[" .. Player.metadata['callsign'] .. "]",
-        Time = day .. "/" .. month .. "/" .. year .. " " .. " - " .. h .. " : " .. m .. " : " .. s .. " LOCAL",
+        Time = day .. "/" .. month .. "/" .. year .. " " .. " - " .. AddZeroInfrontOfLess(h) .. " : " .. AddZeroInfrontOfLess(m) .. " : " .. AddZeroInfrontOfLess(s) .. " LOCAL",
         Department = DepartmentLabel,
         DeptLogo = Logo
     })
@@ -88,7 +97,7 @@ RegisterNetEvent("LENT-GovEssentials:Client:BodyCamStatus", function(h, m, s, Ac
             action = "ShowBodyCam",
             Player = Player.job.grade.name .. " " .. gender .. " " .. Player.charinfo.lastname,
             Callsign = "[" .. Player.metadata['callsign'] .. "]",
-            Time = day .. "/" .. month .. "/" .. year .. " " .. " - " .. h .. " : " .. m .. " : " .. s .. " LOCAL",
+            Time = day .. "/" .. month .. "/" .. year .. " " .. " - " .. AddZeroInfrontOfLess(h) .. " : " .. AddZeroInfrontOfLess(m) .. " : " .. AddZeroInfrontOfLess(s) .. " LOCAL",
             Department = DepartmentLabel,
             DeptLogo = Logo
         })
